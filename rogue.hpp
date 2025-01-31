@@ -27,4 +27,5 @@ class board{
   std::vector<int> bg;
   int& operator()(const int,const int);
   board(int, int, int);
+  void draw(sf::RenderWindow&);
 };
