@@ -3,7 +3,7 @@
 
 Item::Item (std::vector<int> coords) : coords{coords} {}
 Potion::Potion (std::vector<int> coords, int heal) : Item(coords), heal{heal}, id{1} {
-    if (!texture.loadFromFile("Textures/")) {
+    if (!texture.loadFromFile("Textures/Items/potion.png")) {
         std::cout << "Render error" << std::endl;
     }
     sprite.setTexture(texture);
@@ -11,7 +11,7 @@ Potion::Potion (std::vector<int> coords, int heal) : Item(coords), heal{heal}, i
     sprite.setScale(sf::Vector2f(19,19));
 }
 Sword::Sword (std::vector<int> coords, int damage) : Item(coords), damage{damage}, id{2} {
-    if (!texture.loadFromFile("Textures/")) {
+    if (!texture.loadFromFile("Textures/Items/sword.png")) {
         std::cout << "Render error" << std::endl;
     }
     sprite.setTexture(texture);
@@ -19,7 +19,7 @@ Sword::Sword (std::vector<int> coords, int damage) : Item(coords), damage{damage
     sprite.setScale(sf::Vector2f(19,19));
 }
 Xp_bottle::Xp_bottle (std::vector<int> coords, int xp) : Item(coords), xp{xp}, id{3} {
-    if (!texture.loadFromFile("Textures/")) {
+    if (!texture.loadFromFile("Textures/Items/xp_bottle.png")) {
         std::cout << "Render error" << std::endl;
     }
     sprite.setTexture(texture);
@@ -27,7 +27,7 @@ Xp_bottle::Xp_bottle (std::vector<int> coords, int xp) : Item(coords), xp{xp}, i
     sprite.setScale(sf::Vector2f(19,19));
 }
 Gold::Gold (std::vector<int> coords, int value) : Item(coords), value{value}, id{4} {
-    if (!texture.loadFromFile("Textures/")) {
+    if (!texture.loadFromFile("Textures/Items/coin.png")) {
         std::cout << "Render error" << std::endl;
     }
     sprite.setTexture(texture);
@@ -93,8 +93,4 @@ void Armor::equip (Hero &hero) {
     remove_from_inventory(hero);
     hero.armor->add_to_inventory(hero);
     hero.armor = this;
-}
-
-int main () {
-    return EXIT_SUCCESS;
 }

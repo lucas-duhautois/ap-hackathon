@@ -16,9 +16,19 @@
 #include <random>
 #include <functional>
 #include "rogue.hpp"
+#include "Hero.hpp"
+#include "item.hpp"
+#include "dungeon.hpp"
 
+double randomDouble() {
+    static std::random_device rd;  // Génère une graine unique
+    static std::mt19937 gen(rd()); // Générateur Mersenne Twister
+    static std::uniform_real_distribution<double> dis(0.0, 1.0); // Distribution uniforme
 
- board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
+    return dis(gen);
+}
+
+board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
   {
   bg.resize(nx * ny, 0);
   };
@@ -29,9 +39,14 @@
 
 
 
-void startGame(board &map)
+void startGame(board &map, sf::Font font)
 {
-    sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
+    static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
+    window.clear(sf::Color::White);
+    
+    window.display();
+    std::vector<int> init_pos {10,10};
+    Hero player (init_pos, 100, 100, 10, 1, 0);
     while (window.isOpen())
   {
     sf::Event event;
@@ -42,7 +57,10 @@ void startGame(board &map)
             exit(1);}
       
     }
-  
+    player.print(window);
+    window.clear(sf::Color::White);
+    
+    window.display();
     
     
     
@@ -54,12 +72,16 @@ void startGame(board &map)
 
 int main()
 {
+  static sf::Font font;
+  font.loadFromFile("gamefont.otf");
+
+
+
   const int nx = 100;
   const int ny = 50;
   const int taille = 10;
   board map(nx,ny,taille);
 
-
-  startGame(map);
+  startGame(map, font);
   return 0;
 }
