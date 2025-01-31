@@ -49,14 +49,14 @@ void board::draw(sf::RenderWindow&  window){
 
             switch(cellValue)
             {
-                case 0: // E.g. empty/floor
-                    rect.setFillColor(sf::Color(50, 50, 50)); // dark gray
+                case 0: // E.g. wall
+                    rect.setFillColor(sf::Color(10, 10, 10)); // dark gray
                     break;
-                case 1: // E.g. wall
+                case 1: // E.g. floor
                     rect.setFillColor(sf::Color(100, 100, 100)); // lighter gray
                     break;
                 case 2: // Another tile type
-                    rect.setFillColor(sf::Color::Blue);
+                    rect.setFillColor(sf::Color(50, 50, 50));
                     break;
                 default:
                     rect.setFillColor(sf::Color::Magenta); // unknown
@@ -72,17 +72,20 @@ void board::draw(sf::RenderWindow&  window){
 
 
 
+
+
 void startGame(board &map, sf::Font font)
 {
+    auto start = std::chrono::high_resolution_clock::now();
     bool inventory_opened = false;
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
-    room Piece(10,10,std::vector<int> {map.nx/2,map.ny/2},map);
+    room Piece(10,10,std::vector<int> {map.nx/2 - 5, map.ny/2 - 5},map);
 
-    std::vector<int> init_pos {10,10};
+    std::vector<int> init_pos {map.nx/2 - 1, map.ny/2 - 1};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
+
     Sword test({10, 10}, 4);
     test.add_to_inventory(player);
-    map.draw(window);
     window.display();
     test.equip(player);
     while (window.isOpen())
@@ -94,22 +97,30 @@ void startGame(board &map, sf::Font font)
                exit(1);
            }
            else if (event.type == sf::Event::KeyPressed){
+                auto stop = std::chrono::high_resolution_clock::now();
+                auto cooldown = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+                std::cout << cooldown.count() << std::endl;
+
                if(event.key.code == sf::Keyboard::Escape){
                    window.close();
                    exit(1);
                }
 
-               else if (event.key.code == sf::Keyboard::Right){
+               else if (event.key.code == sf::Keyboard::Right && map(player.position[0] + 1, player.position[1]) != 0 && cooldown.count() > 100){
                    player.move_right();
+                   start = std::chrono::high_resolution_clock::now();
                }
-               else if (event.key.code == sf::Keyboard::Left){
+               else if (event.key.code == sf::Keyboard::Left && map(player.position[0] - 1, player.position[1]) != 0 && cooldown.count() > 100){
                    player.move_left();
+                   start = std::chrono::high_resolution_clock::now();
                }
-               else if (event.key.code == sf::Keyboard::Down){
+               else if (event.key.code == sf::Keyboard::Down && map(player.position[0], player.position[1] + 1) != 0 && cooldown.count() > 100){
                    player.move_down();
+                   start = std::chrono::high_resolution_clock::now();
                }
-               else if (event.key.code == sf::Keyboard::Up){
+               else if (event.key.code == sf::Keyboard::Up && map(player.position[0], player.position[1] - 1) != 0 && cooldown.count() > 100){
                    player.move_up();
+                   start = std::chrono::high_resolution_clock::now();
                }
                else if (event.key.code == sf::Keyboard::E){
                  inventory_opened = !inventory_opened;
@@ -117,7 +128,9 @@ void startGame(board &map, sf::Font font)
            }
       
     }
-    //window.clear(sf::Color::White);
+    window.clear(sf::Color::White);
+    
+    map.draw(window);
     player.print(window);
     if (inventory_opened){
       player.print_inventory(window);
@@ -150,9 +163,9 @@ int main()
 
 
 
-  const int nx = 80;
-  const int ny = 60;
-  const int taille = 10;
+  const int nx = 60;
+  const int ny = 45;
+  const int taille = 20;
   board map(nx,ny,taille);
 
   startGame(map, font);
