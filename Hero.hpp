@@ -17,4 +17,6 @@ class Hero{
     public:
     Hero(std::vector<int> position, int Hp, int strength, int Level, int xp){}
 
+    void kill(){}
+    void damage(int amount){}
 };
