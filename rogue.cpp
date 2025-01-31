@@ -149,9 +149,9 @@ int main()
 
 
 
-  const int nx = 60;
-  const int ny = 45;
-  const int taille = 20;
+  const int nx = 80;
+  const int ny = 60;
+  const int taille = 10;
   board map(nx,ny,taille);
 
   startGame(map, font);
