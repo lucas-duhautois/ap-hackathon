@@ -15,11 +15,18 @@ class Hero{
     int gold;
     int xp;
     int level;
+
+    std::vector<int> Inventory;
+    std::vector<int> Armor;
+
     std::vector<int> position;
     sf::Sprite sprite;
 
 
-    Hero(std::vector<int> position, int hp, int maxhp, int strength, int gold, int level, int xp): position{position}, hp{hp}, max_hp{max_hp}, strength{strength}, gold{gold}, level{level}, xp{xp}{
+    Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp): position{position}, hp{hp}, max_hp{max_hp}, strength{strength}, gold{gold}, level{level}, xp{xp}{
+
+        Inventory = std::vector<int>(15, 0);
+
         sf::Texture texture;
         texture.loadFromFile("Textures/rogue_hero.png");
         sprite.setTexture(texture);
@@ -41,9 +48,12 @@ class Hero{
     void gain_xp(int amount){
         xp += amount;
         int max_xp = 10 * level;
-        if (xp <= max_xp){
-            xp = xp % max_xp;
+        while (xp <= max_xp){
+            xp -= max_xp;
             level ++;
+            strength += level/3 + 1;
+            max_hp += level * 3;
+            max_xp = 10 * level;
         }
     }
 
