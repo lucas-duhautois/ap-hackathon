@@ -1,14 +1,13 @@
+#pragma once
+
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
 
 
-
-
-
 class Hero{
-    protected:
+    private:
     int Hp_;
     int strength_;
     int xp_;
@@ -16,6 +15,6 @@ class Hero{
     std::vector<int> position_;
 
     public:
-    Hero(std::vector<int> position, int Hp, int strength, int Level, int xp): position_{position}, Hp_{Hp}, strength_{strength},Level_{Level}, xp_{xp}{}
+    Hero(std::vector<int> position, int Hp, int strength, int Level, int xp){}
 
 };
