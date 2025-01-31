@@ -10,8 +10,8 @@ Potion::Potion (std::vector<int> coords, int heal) : Item(coords), heal{heal}, i
     sprite.setScale(sf::Vector2f(19,19));
 }
 Sword::Sword (std::vector<int> coords, int damage) : Item(coords), damage{damage}, id{2} {
-    sf::Texture texture;
-    texture.loadFromFile("Textures/Items/sword.png");
+    //sf::Texture texture;
+    //texture.loadFromFile("Textures/Items/sword.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
@@ -91,3 +91,5 @@ void Armor::equip (Hero &hero) {
     hero.armor->add_to_inventory(hero);
     hero.armor = this;
 }
+
+sf::Texture Sword::texture;
