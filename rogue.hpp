@@ -17,6 +17,8 @@
 #include <random>
 #include <functional>
 
+double randomDouble();
+
 class board{
   public:
   int nx;
