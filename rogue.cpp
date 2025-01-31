@@ -44,7 +44,7 @@ void startGame(board &map, sf::Font font)
     bool inventory_opened = false;
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
     //room Piece(10,10,std::vector<int> {map.nx/2,map.ny/2},map);
-    
+
     std::vector<int> init_pos {10,10};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
     Sword test({10, 10}, 4);
