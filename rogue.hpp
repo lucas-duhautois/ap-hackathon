@@ -16,9 +16,6 @@
 #include <set>
 #include <random>
 #include <functional>
-#include "Hero.hpp"
-#include "dungeon.hpp"
-#include "item.hpp"
 
 class board{
   public:
@@ -26,6 +23,6 @@ class board{
   int ny;
   int taille_cases;
   std::vector<int> bg;
-  int& board::operator()(const int j,const int i);
-  board::board(int init_nx, int init_ny, int taille_cases){};
+  int& operator()(const int,const int);
+  board(int, int, int){};
 };

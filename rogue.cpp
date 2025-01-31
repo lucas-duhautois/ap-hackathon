@@ -16,9 +16,12 @@
 #include <random>
 #include <functional>
 #include "rogue.hpp"
+#include "Hero.hpp"
+//#include "item.hpp"
+//#include "dungeon.hpp"
 
 
- board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
+board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
   {
   bg.resize(nx * ny, 0);
   };
@@ -31,7 +34,7 @@
 
 void startGame(board &map, sf::Font font)
 {
-    sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
+    static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
     window.clear(sf::Color::White);
     
     window.display();
@@ -45,7 +48,9 @@ void startGame(board &map, sf::Font font)
             exit(1);}
       
     }
-  
+  std::vector<int> init_pos {10,10};
+  Hero player (init_pos, 100, 100, 10, 1, 0);
+  player.print(window);
     
     
     
@@ -66,7 +71,6 @@ int main()
   const int ny = 50;
   const int taille = 10;
   board map(nx,ny,taille);
-
 
   startGame(map, font);
   return 0;
