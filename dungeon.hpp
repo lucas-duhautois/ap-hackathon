@@ -3,3 +3,5 @@
 #include <vector>
 #include <array>
 #include <SFML/Graphics.hpp>
+
+class room;
