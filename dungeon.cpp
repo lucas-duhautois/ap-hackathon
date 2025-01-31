@@ -10,8 +10,14 @@ room::room(int init_Lx ,int init_Ly, std::vector<int>init_p, board &map):Lx{init
     map(position[0] + x,position[1] + y) = 1;
   }
   }
-
-
+for (x = 0; x<Lx; x++)
+  {if(rand()%10==5){tile piece(std::vector<int> {position[0]+x,position[1]-1},map,4);}
+   if(rand()%10==5){tile piece(std::vector<int> {position[0]+x,position[1]+Ly+1},map,1);}
+  }
+for (y = 0; y<Ly; y++)
+  {if(rand()%10==5){tile piece(std::vector<int> {position[0]-1,position[1]+y},map,3);}
+   if(rand()%10==5){tile piece(std::vector<int> {position[0]+Lx+1,position[1]+y},map,0);}
+  }
 }
 
 
