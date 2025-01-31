@@ -29,9 +29,12 @@
 
 
 
-void startGame(board &map)
+void startGame(board &map, sf::Font font)
 {
     sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
+    window.clear(sf::Color::White);
+    
+    window.display();
     while (window.isOpen())
   {
     sf::Event event;
@@ -54,12 +57,17 @@ void startGame(board &map)
 
 int main()
 {
+  static sf::Font font;
+  font.loadFromFile("gamefont.otf");
+
+
+
   const int nx = 100;
   const int ny = 50;
   const int taille = 10;
   board map(nx,ny,taille);
 
 
-  startGame(map);
+  startGame(map, font);
   return 0;
 }
