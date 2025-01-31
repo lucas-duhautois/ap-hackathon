@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "item.hpp"
+#include "Hero.hpp"
 
 
 
@@ -10,48 +11,21 @@ sf::Texture hero_texture;
 sf::Texture inventory_texture;
 
 
-
-class Hero{
-    public:
-    int hp;
-    int max_hp;
-    int strength;
-    int gold;
-    int xp;
-    int level;
-
-    std::array<Item*, 15> Inventory;
-    Item* armor;
-    Item* weapon;
-
-    std::vector<int> position;
-    sf::Sprite hero_sprite;
-    sf::Sprite inventory_sprite;
-
-
-    Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp): position{position}, hp{hp}, max_hp{max_hp}, strength{strength}, gold{gold}, level{level}, xp{xp}{
-
-        Inventory = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
-        armor = nullptr;
-        weapon = nullptr;
-
-        hero_sprite.setTexture(hero_texture);
-        hero_sprite.setPosition(20*position[0], 20*position[1]);
-
-        inventory_sprite.setTexture(inventory_texture);
-    }
-
-    void print(sf::RenderWindow& window){
+Hero::Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp): position{position}, hp{hp}, max_hp{max_hp}, strength{strength}, gold{gold}, level{level}, xp{xp}{
+    Inventory = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
+    armor = nullptr;
+    weapon = nullptr;
+    hero_sprite.setTexture(hero_texture);
+    hero_sprite.setPosition(20*position[0], 20*position[1]);
+    inventory_sprite.setTexture(inventory_texture);
+}
+void Hero::print(sf::RenderWindow& window){
         window.draw(hero_sprite);
     }
-
-
-
-    void updt(){
+void Hero::updt(){
         hero_sprite.setPosition(20*position[0], 20*position[1]);
     }
-
-    void print_inventory(sf::RenderWindow& window){
+void Hero::print_inventory(sf::RenderWindow& window){
         int x0 = 1200/2 - 125;
         int y0 = 900/2 - 125;
 
@@ -74,10 +48,8 @@ class Hero{
             }
         }
     }
-
-    void kill(){}
-
-    void damage(int amount){
+void Hero::kill(){}
+void Hero::damage(int amount){
         hp += amount;
         if (hp >= max_hp){
             hp = max_hp;
@@ -87,8 +59,7 @@ class Hero{
             this->kill();
         }
     }
-
-    void gain_xp(int amount){
+void Hero::gain_xp(int amount){
         xp += amount;
         int max_xp = 10 * level;
         while (xp <= max_xp){
@@ -99,39 +70,32 @@ class Hero{
             max_xp = 10 * level;
         }
     }
-
-    void gain_strength(int amount){
+void Hero::gain_strength(int amount){
         strength += amount;
         if (strength < 0){
             strength = 0;
         }
     }
-
-    void gain_gold(int amount){
+void Hero::gain_gold(int amount){
         gold += amount;
     }
-
-    void move_left(){
+void Hero::move_left(){
         position[0]--;
         this->updt();
     }
-
-    void move_right(){
+void Hero::move_right(){
         position[0]++;
         this->updt();
     }
-
-    void move_down(){
+void Hero::move_down(){
         position[1]++;
         this->updt();
     }
-
-    void move_up(){
+void Hero::move_up(){
         position[1]--;
         this->updt();
     }
 
-};
 
 
 
