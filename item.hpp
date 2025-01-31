@@ -10,7 +10,6 @@ class Item {
     public:
     std::vector<int> coords;
     sf::Sprite sprite;
-    static sf::Texture texture;
 
     Item() = default;
     Item(std::vector<int>);
@@ -19,7 +18,6 @@ class Item {
     void print(sf::RenderWindow&);
     bool add_to_inventory(Hero&);
     bool remove_from_inventory(Hero&);
-    static void loadTexture (const std::string& path);
 };
 
 class Potion : public Item {
@@ -36,11 +34,12 @@ class Sword : public Item {
     public:
     int damage;
     int id;
-
+    static sf::Texture texture;
 
     Sword(std::vector<int>, int);
     ~Sword() = default;
     void equip(Hero&);
+    static void loadTexture (const std::string& path);
 };
 
 class Xp_bottle : public Item {

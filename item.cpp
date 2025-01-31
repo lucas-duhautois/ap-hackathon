@@ -45,7 +45,7 @@ Armor::Armor (std::vector<int> coords) : Item(coords), id{6} {
     sprite.setScale(sf::Vector2f(19,19));
 }
 
-void Item::loadTexture (const std::string& path){
+void Sword::loadTexture (const std::string& path){
     texture.loadFromFile(path);
 }
 bool Item::add_to_inventory(Hero& hero) {
