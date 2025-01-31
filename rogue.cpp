@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <array>
+#include <algorithm>
+#include <thread>
+#include "sys/ioctl.h"
+#include "termios.h"
+#include "stdio.h"
+#include "time.h"
+#include "stdlib.h"
+#include <SFML/Graphics.hpp>
+#include <string>
+#include <chrono> 
+#include <set>
+#include <random>
+#include <functional>
+
+
+int main(){
+    return 0;
+}
