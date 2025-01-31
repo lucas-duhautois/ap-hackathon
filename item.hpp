@@ -43,7 +43,7 @@ class Xp_bottle : public Item {
 class Gold : public Item {
     public:
     void use(Hero&);
-}
+};
 
 class Bow : public Item {
     public:
