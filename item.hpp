@@ -3,19 +3,22 @@
 #include <iostream>
 #include <array>
 #include <SFML/Graphics.hpp>
-#include "Hero.hpp"
+
+class Hero;
 
 class Item {
     public:
-    std::array<int, 2> coords;
+    std::vector<int> coords;
     sf::Sprite sprite;
 
     Item() = default;
-    Item(std::array<int, 2>);
+    Item(std::vector<int>);
     ~Item() = default;
 
     virtual void use(Hero&) = 0;
     void print(sf::RenderWindow&);
+    bool add_to_inventory(Hero&);
+    bool remove_from_inventory(Hero&);
 };
 
 class Potion : public Item {
@@ -24,7 +27,8 @@ class Potion : public Item {
     int id;
     static sf::Texture texture;
 
-    Potion(std::array<int, 2>, int);
+    Potion(std::vector<int>, int);
+    ~Potion() = default;
     void use(Hero&);
 };
 
@@ -35,7 +39,8 @@ class Sword : public Item {
     static sf::Texture texture;
 
 
-    Sword(std::array<int, 2>, int);
+    Sword(std::vector<int>, int);
+    ~Sword() = default;
     void equip(Hero&);
 };
 
@@ -45,7 +50,8 @@ class Xp_bottle : public Item {
     int id;
     static sf::Texture texture;
 
-    Xp_bottle(std::array<int, 2>, int);
+    Xp_bottle(std::vector<int>, int);
+    ~Xp_bottle() = default;
     void use(Hero&);
 };
 
@@ -55,7 +61,8 @@ class Gold : public Item {
     int id;
     static sf::Texture texture;
 
-    Gold(std::array<int, 2>, int);
+    Gold(std::vector<int>, int);
+    ~Gold() = default;
     void use(Hero&);
 };
 
@@ -64,7 +71,8 @@ class Bow : public Item {
     int id;
     static sf::Texture texture;
 
-    Bow(std::array<int, 2>);
+    Bow(std::vector<int>);
+    ~Bow() = default;
     void use(Hero&);
 };
 
@@ -73,6 +81,7 @@ class Armor : public Item {
     int id;
     static sf::Texture texture;
 
-    Armor(std::array<int, 2>);
+    Armor(std::vector<int>);
+    ~Armor() = default;
     void equip(Hero&);
 };
