@@ -28,27 +28,23 @@ double randomDouble() {
     return dis(gen);
 }
 
-board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
-  {
-  bg.resize(nx * ny, 0);
-  };
+board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny}, taille_cases{taille_cases} {
+    bg.resize(nx * ny, 0);
+}
 
-  int& board::operator()(const int j,const int i){
-    return bg[nx*i+j];}
+int& board::operator()(const int j, const int i) {
+    return bg[nx * i + j];
+}
 
-void board::draw(sf::RenderWindow&  window){
- for (int y = 0; y < ny; ++y)
-    {
-        for (int x = 0; x < nx; ++x)
-        {
-    
+void board::draw(sf::RenderWindow& window) {
+    for (int y = 0; y < ny; ++y) {
+        for (int x = 0; x < nx; ++x) {
             int cellValue = this->operator()(x, y);
 
             sf::RectangleShape rect(sf::Vector2f(taille_cases, taille_cases));
             rect.setPosition(x * taille_cases, y * taille_cases);
 
-            switch(cellValue)
-            {
+            switch (cellValue) {
                 case 0: // E.g. wall
                     rect.setFillColor(sf::Color(10, 10, 10)); // dark gray
                     break;
@@ -67,107 +63,89 @@ void board::draw(sf::RenderWindow&  window){
             window.draw(rect);
         }
     }
-
 }
 
-
-
-
-
-void startGame(board &map, sf::Font font)
-{
-    auto start = std::chrono::high_resolution_clock::now();
+void startGame(board &map, sf::Font font) {
+    auto start_up = std::chrono::high_resolution_clock::now();
+    auto start_down = std::chrono::high_resolution_clock::now();
+    auto start_left = std::chrono::high_resolution_clock::now();
+    auto start_right = std::chrono::high_resolution_clock::now();
     bool inventory_opened = false;
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
-    room Piece(10,10,std::vector<int> {map.nx/2 - 5, map.ny/2 - 5},map);
+    room Piece(10, 10, std::vector<int>{map.nx / 2 - 5, map.ny / 2 - 5}, map);
 
-    std::vector<int> init_pos {map.nx/2 - 1, map.ny/2 - 1};
+    std::vector<int> init_pos{map.nx / 2 - 1, map.ny / 2 - 1};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
 
     Sword test({10, 10}, 4);
     test.add_to_inventory(player);
     window.display();
     test.equip(player);
-    while (window.isOpen())
-  {
-    sf::Event event;
-    while (window.pollEvent(event)){
-           if (event.type == sf::Event::Closed) {
-               window.close();
-               exit(1);
-           }
-           else if (event.type == sf::Event::KeyPressed){
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+                exit(1);
+            } else if (event.type == sf::Event::KeyPressed) {
                 auto stop = std::chrono::high_resolution_clock::now();
-                auto cooldown = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-                std::cout << cooldown.count() << std::endl;
+                auto cooldown_left = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start_left);
+                auto cooldown_right = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start_right);
+                auto cooldown_up = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start_up);
+                auto cooldown_down = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start_down);
 
-               if(event.key.code == sf::Keyboard::Escape){
-                   window.close();
-                   exit(1);
-               }
+                if (event.key.code == sf::Keyboard::Escape) {
+                    window.close();
+                    exit(1);
+                } else if (event.key.code == sf::Keyboard::Right && map(player.position[0] + 1, player.position[1]) != 0 && cooldown_right.count() > 100) {
+                    player.move_right();
+                    start_right = std::chrono::high_resolution_clock::now();
+                } else if (event.key.code == sf::Keyboard::Left && map(player.position[0] - 1, player.position[1]) != 0 && cooldown_left.count() > 100) {
+                    player.move_left();
+                    start_left = std::chrono::high_resolution_clock::now();
+                } else if (event.key.code == sf::Keyboard::Down && map(player.position[0], player.position[1] + 1) != 0 && cooldown_down.count() > 100) {
+                    player.move_down();
+                    start_down = std::chrono::high_resolution_clock::now();
+                } else if (event.key.code == sf::Keyboard::Up && map(player.position[0], player.position[1] - 1) != 0 && cooldown_up.count() > 100) {
+                    player.move_up();
+                    start_up = std::chrono::high_resolution_clock::now();
+                } else if (event.key.code == sf::Keyboard::E) {
+                    inventory_opened = !inventory_opened;
+                }
+            }
+        }
 
-               else if (event.key.code == sf::Keyboard::Right && map(player.position[0] + 1, player.position[1]) != 0 && cooldown.count() > 100){
-                   player.move_right();
-                   start = std::chrono::high_resolution_clock::now();
-               }
-               else if (event.key.code == sf::Keyboard::Left && map(player.position[0] - 1, player.position[1]) != 0 && cooldown.count() > 100){
-                   player.move_left();
-                   start = std::chrono::high_resolution_clock::now();
-               }
-               else if (event.key.code == sf::Keyboard::Down && map(player.position[0], player.position[1] + 1) != 0 && cooldown.count() > 100){
-                   player.move_down();
-                   start = std::chrono::high_resolution_clock::now();
-               }
-               else if (event.key.code == sf::Keyboard::Up && map(player.position[0], player.position[1] - 1) != 0 && cooldown.count() > 100){
-                   player.move_up();
-                   start = std::chrono::high_resolution_clock::now();
-               }
-               else if (event.key.code == sf::Keyboard::E){
-                 inventory_opened = !inventory_opened;
-              }
-           }
-      
+        window.clear(sf::Color::White);
+
+        map.draw(window);
+        player.print(window);
+        if (inventory_opened) {
+            player.print_inventory(window);
+        }
+
+        window.display();
     }
-    window.clear(sf::Color::White);
-    
-    map.draw(window);
-    player.print(window);
-    if (inventory_opened){
-      player.print_inventory(window);
-    }
-    
-    window.display();
-    
-    
-    
-    }
-     
-    
-  }
+}
 
+int main() {
+    Hero::load_hero_texture("Textures/Hero/rogue_hero.png");
+    Hero::load_inventory_texture("Textures/Inventory.png");
 
-int main()
-{
+    Potion::loadTexture("Textures/Items/potion.png");
+    Sword::loadTexture("Textures/Items/sword.png");
+    Xp_bottle::loadTexture("Textures/Items/xp_bottle.png");
+    Gold::loadTexture("Textures/Items/gold.png");
+    // Armor::loadTexture("Textures/Items/armor.png");
 
-  Hero::load_hero_texture("Textures/Hero/rogue_hero.png");
-  Hero::load_inventory_texture("Textures/Inventory.png");
+    static sf::Font font;
+    font.loadFromFile("gamefont.otf");
 
-  Potion::loadTexture("Textures/Items/potion.png");
-  Sword::loadTexture("Textures/Items/sword.png");
-  Xp_bottle::loadTexture("Textures/Items/xp_bottle.png");
-  Gold::loadTexture("Textures/Items/gold.png");
-  //Armor::loadTexture("Textures/Items/armor.png");
+    const int nx = 60;
+    const int ny = 45;
+    const int taille = 20;
+    board map(nx, ny, taille);
 
-  static sf::Font font;
-  font.loadFromFile("gamefont.otf");
-
-
-
-  const int nx = 60;
-  const int ny = 45;
-  const int taille = 20;
-  board map(nx,ny,taille);
-
-  startGame(map, font);
-  return 0;
+    startGame(map, font);
+    return 0;
 }

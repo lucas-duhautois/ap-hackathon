@@ -2,7 +2,8 @@
 #include "dungeon.hpp"
 
 room::room(int init_Lx ,int init_Ly, std::vector<int>init_p, board &map):Lx{init_Lx},Ly{init_Ly},position{init_p}
-{int x;
+{std::time_t seed;
+ int x;
  int y;
  for (x = 0; x<Lx; x++)
   {for (y = 0; y < Ly; y++)
@@ -11,12 +12,12 @@ room::room(int init_Lx ,int init_Ly, std::vector<int>init_p, board &map):Lx{init
   }
   }
 for (x = 0; x<Lx; x++)
-  {if(rand()%10==6){tile piece(std::vector<int> {position[0]+x,position[1]-1},map,3);}
-   if(rand()%10==2){tile piece(std::vector<int> {position[0]+x,position[1]+Ly},map,1);}
+  {if(rand()*(seed%7) % 10==6){tile piece(std::vector<int> {position[0]+x,position[1]-1},map,3);}
+   if(rand()*(seed%7) % 10==2){tile piece(std::vector<int> {position[0]+x,position[1]+Ly},map,1);}
   }
 for (y = 0; y<Ly; y++)
-  {if(rand()%10==3){tile piece(std::vector<int> {position[0]-1,position[1]+y},map,2);}
-   if(rand()%10==1){tile piece(std::vector<int> {position[0]+Lx,position[1]+y},map,0);}
+  {if(rand()*(seed%7) % 10==3){tile piece(std::vector<int> {position[0]-1,position[1]+y},map,2);}
+   if(rand()*(seed%7) % 10==1){tile piece(std::vector<int> {position[0]+Lx,position[1]+y},map,0);}
   }
 }
 

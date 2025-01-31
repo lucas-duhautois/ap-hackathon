@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <ctime>
 #include <SFML/Graphics.hpp>
 #include "item.hpp"
 #include "rogue.hpp"
