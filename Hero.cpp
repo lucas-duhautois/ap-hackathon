@@ -44,16 +44,19 @@ void Hero::print_inventory(sf::RenderWindow& window){
         if (armor != nullptr){
             armor->sprite.setPosition(x0 + 54, y0 + 39);
             armor->sprite.setScale(1.5, 1.5);
+            window.draw(armor->sprite);
         }
         if (weapon != nullptr){
             weapon->sprite.setPosition(x0 + 121, y0 + 39);
             weapon->sprite.setScale(1.5, 1.5);
+            window.draw(weapon->sprite);
         }
 
         for (int i = 0; i < 15; i++){
             if (Inventory[i] != nullptr){
                 Inventory[i]->sprite.setPosition(x0 + 25 + 48 * (i%5), y0 + 121 + 48 * (i/3));
                 Inventory[i]->sprite.setScale(1.5, 1.5);
+                window.draw(Inventory[i]->sprite);
             }
         }
     }
