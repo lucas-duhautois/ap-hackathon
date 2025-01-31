@@ -3,49 +3,43 @@
 
 Item::Item (std::vector<int> coords) : coords{coords} {}
 Potion::Potion (std::vector<int> coords, int heal) : Item(coords), heal{heal}, id{1} {
-    if (!texture.loadFromFile("Textures/Items/potion.png")) {
-        std::cout << "Render error" << std::endl;
-    }
+    sf::Texture texture;
+    texture.loadFromFile("Textures/Items/potion.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 Sword::Sword (std::vector<int> coords, int damage) : Item(coords), damage{damage}, id{2} {
-    if (!texture.loadFromFile("Textures/Items/sword.png")) {
-        std::cout << "Render error" << std::endl;
-    }
+    sf::Texture texture;
+    texture.loadFromFile("Textures/Items/sword.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 Xp_bottle::Xp_bottle (std::vector<int> coords, int xp) : Item(coords), xp{xp}, id{3} {
-    if (!texture.loadFromFile("Textures/Items/xp_bottle.png")) {
-        std::cout << "Render error" << std::endl;
-    }
+    sf::Texture texture;
+    texture.loadFromFile("Textures/Items/xp_bottle.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 Gold::Gold (std::vector<int> coords, int value) : Item(coords), value{value}, id{4} {
-    if (!texture.loadFromFile("Textures/Items/coin.png")) {
-        std::cout << "Render error" << std::endl;
-    }
+    sf::Texture texture;
+    texture.loadFromFile("Textures/Items/coin.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
-Bow::Bow (std::vector<int> coords) : Item(coords), id{5} {
-    if (!texture.loadFromFile("Textures/")) {
-        std::cout << "Render error" << std::endl;
-    }
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
-    sprite.setScale(sf::Vector2f(19,19));
-}
+// Bow::Bow (std::vector<int> coords) : Item(coords), id{5} {
+//     sf::Texture texture;
+//     texture.loadFromFile("Textures/Items/bow.png");
+//     sprite.setTexture(texture);
+//     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
+//     sprite.setScale(sf::Vector2f(19,19));
+// }
 Armor::Armor (std::vector<int> coords) : Item(coords), id{6} {
-    if (!texture.loadFromFile("Textures/")) {
-        std::cout << "Render error" << std::endl;
-    }
+    sf::Texture texture;
+    texture.loadFromFile("Textures/");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
