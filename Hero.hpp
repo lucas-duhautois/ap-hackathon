@@ -7,16 +7,22 @@
 
 
 class Hero{
-    private:
-    int Hp_;
-    int strength_;
-    int xp_;
-    int Level_;
-    std::vector<int> position_;
-
     public:
-    Hero(std::vector<int> position, int Hp, int strength, int Level, int xp){}
+    int Hp;
+    int max_hp;
+    int strength;
+    int xp;
+    int Level;
+    std::vector<int> position;
+
+
+    Hero(std::vector<int> position, int hp, int maxhp, int strength, int Level, int xp){}
 
     void kill(){}
+
     void damage(int amount){}
+
+    void gainxp(int amount){}
+
+    void gainstrength(int amount){}
 };
