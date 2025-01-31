@@ -49,6 +49,7 @@ void startGame(board &map, sf::Font font)
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
     Sword test({10, 10}, 4);
     test.add_to_inventory(player);
+    test.equip(player);
     while (window.isOpen())
   {
     sf::Event event;
