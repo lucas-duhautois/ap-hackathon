@@ -46,7 +46,7 @@ void startGame(board &map, sf::Font font)
 
     std::vector<int> init_pos {10,10};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
-    Sword test({10, 10}, 4);
+    Potion test({10, 10}, 4);
     player.Inventory[7] = test;
     while (window.isOpen())
   {
