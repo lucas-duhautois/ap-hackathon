@@ -27,5 +27,5 @@ class board{
   int taille_cases;
   std::vector<int> bg;
   int& board::operator()(const int j,const int i);
-  board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}{};
+  board::board(int init_nx, int init_ny, int taille_cases){};
 };
