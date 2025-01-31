@@ -36,6 +36,39 @@ board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_
   int& board::operator()(const int j,const int i){
     return bg[nx*i+j];}
 
+void board::draw(sf::RenderWindow&  window){
+ for (int y = 0; y < ny; ++y)
+    {
+        for (int x = 0; x < nx; ++x)
+        {
+    
+            int cellValue = this->operator()(x, y);
+
+            sf::RectangleShape rect(sf::Vector2f(taille_cases, taille_cases));
+            rect.setPosition(x * taille_cases, y * taille_cases);
+
+            switch(cellValue)
+            {
+                case 0: // E.g. empty/floor
+                    rect.setFillColor(sf::Color(50, 50, 50)); // dark gray
+                    break;
+                case 1: // E.g. wall
+                    rect.setFillColor(sf::Color(100, 100, 100)); // lighter gray
+                    break;
+                case 2: // Another tile type
+                    rect.setFillColor(sf::Color::Blue);
+                    break;
+                default:
+                    rect.setFillColor(sf::Color::Magenta); // unknown
+                    break;
+            }
+
+            // Draw the cell
+            window.draw(rect);
+        }
+    }
+
+}
 
 
 
@@ -43,12 +76,14 @@ void startGame(board &map, sf::Font font)
 {
     bool inventory_opened = false;
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
-    //room Piece(10,10,std::vector<int> {map.nx/2,map.ny/2},map);
+    room Piece(10,10,std::vector<int> {map.nx/2,map.ny/2},map);
 
     std::vector<int> init_pos {10,10};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
     Sword test({10, 10}, 4);
     test.add_to_inventory(player);
+    map.draw(window);
+    window.display();
     test.equip(player);
     while (window.isOpen())
   {
@@ -82,7 +117,7 @@ void startGame(board &map, sf::Font font)
            }
       
     }
-    window.clear(sf::Color::White);
+    //window.clear(sf::Color::White);
     player.print(window);
     if (inventory_opened){
       player.print_inventory(window);
@@ -104,16 +139,20 @@ int main()
   Hero::load_hero_texture("Textures/Hero/rogue_hero.png");
   Hero::load_inventory_texture("Textures/Inventory.png");
 
+  Potion::loadTexture("Textures/Items/potion.png");
   Sword::loadTexture("Textures/Items/sword.png");
+  Xp_bottle::loadTexture("Textures/Items/xp_bottle.png");
+  Gold::loadTexture("Textures/Items/gold.png");
+  //Armor::loadTexture("Textures/Items/armor.png");
 
   static sf::Font font;
   font.loadFromFile("gamefont.otf");
 
 
 
-  const int nx = 60;
-  const int ny = 45;
-  const int taille = 20;
+  const int nx = 80;
+  const int ny = 60;
+  const int taille = 10;
   board map(nx,ny,taille);
 
   startGame(map, font);

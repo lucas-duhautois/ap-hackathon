@@ -11,12 +11,12 @@ room::room(int init_Lx ,int init_Ly, std::vector<int>init_p, board &map):Lx{init
   }
   }
 for (x = 0; x<Lx; x++)
-  {if(rand()%10==5){tile piece(std::vector<int> {position[0]+x,position[1]-1},map,4);}
-   if(rand()%10==5){tile piece(std::vector<int> {position[0]+x,position[1]+Ly+1},map,1);}
+  {if(rand()%10==6){tile piece(std::vector<int> {position[0]+x,position[1]-1},map,3);}
+   if(rand()%10==2){tile piece(std::vector<int> {position[0]+x,position[1]+Ly},map,1);}
   }
 for (y = 0; y<Ly; y++)
-  {if(rand()%10==5){tile piece(std::vector<int> {position[0]-1,position[1]+y},map,3);}
-   if(rand()%10==5){tile piece(std::vector<int> {position[0]+Lx+1,position[1]+y},map,0);}
+  {if(rand()%10==3){tile piece(std::vector<int> {position[0]-1,position[1]+y},map,2);}
+   if(rand()%10==1){tile piece(std::vector<int> {position[0]+Lx,position[1]+y},map,0);}
   }
 }
 
@@ -27,7 +27,8 @@ tile::tile(std::vector<int>init_p, board &map,int init_direction):position{init_
     map(position[0],position[1]) = 2;
    int x;
    int y;
-   
+   rand();
+   rand();
 if(rand() % 10==5){
     bool triggered = true;
    for (x = 0; x<10; x++)
@@ -51,10 +52,10 @@ if(rand() % 10==5){
     int Ly =(rand() % 10) +1;
 
     if (direction==0){
-        room piece(Lx,Ly, std::vector<int> {position[0],position[1]-Ly/2},map);
+        room piece(Lx,Ly, std::vector<int> {position[0]+1,position[1]-Ly/2},map);
     }
     if (direction==1){
-        room piece(Lx,Ly, std::vector<int> {position[0]-Lx/2,position[1]},map);
+        room piece(Lx,Ly, std::vector<int> {position[0]-Lx/2,position[1]+1},map);
     }
     if (direction==2){
         room piece(Lx,Ly, std::vector<int> {position[0]-Lx,position[1]-Ly/2},map);
@@ -64,33 +65,33 @@ if(rand() % 10==5){
     }
   }
   }else{
-    if (rand()%3<2){
-    if (direction==0 && position[0]+1<map.nx){
+    if (true){
+    if (direction==0 && position[0]+1<map.nx && map(position[0] +1,position[1]) == 0){
         tile piece(std::vector<int> {position[0]+1,position[1]},map,0);
     }
-    if (direction==1 && position[1]+1<map.ny){
+    if (direction==1 && position[1]+1<map.ny && map(position[0] ,position[1]+1) == 0){
         tile piece(std::vector<int> {position[0],position[1]+1},map,1);
     }
-    if (direction==2 && position[0]-1>0){
+    if (direction==2 && position[0]-1>0 && map(position[0]-1 ,position[1]) == 0){
         tile piece(std::vector<int> {position[0]-1,position[1]},map,2);
     }
-      if (direction==3 && position[0]-1<0){
+      if (direction==3 && position[1]-1>0 && map(position[0],position[1]-1) == 0){
         tile piece(std::vector<int> {position[0],position[1]-1},map,3);
     }
 
     }
-if (rand()%3==1){
+if (rand()%15 ==1){
     int u =rand()%4;
-    if (u==0 && position[0]+1<map.nx){
+    if (u==0 && position[0]+1<map.nx && map(position[0] +1,position[1]) == 0){
         tile piece(std::vector<int> {position[0]+1,position[1]},map,0);
     }
-    if (u==1 && position[1]+1<map.ny){
+    if (u==1 && position[1]+1<map.ny && map(position[0],position[1]+1) == 0){
         tile piece(std::vector<int> {position[0],position[1]+1},map,1);
     }
-    if (u==2 && position[0]-1>0){
+    if (u==2 && position[0]-1>0 && map(position[0] -1,position[1]) == 0){
         tile piece(std::vector<int> {position[0]-1,position[1]},map,2);
     }
-      if (u==3 && position[0]-1<0){
+      if (u==3 && position[1]-1>0 && map(position[0],position[1]-1) == 0){
         tile piece(std::vector<int> {position[0],position[1]-1},map,3);
     }
 

@@ -3,29 +3,21 @@
 
 Item::Item (std::vector<int> coords) : coords{coords} {}
 Potion::Potion (std::vector<int> coords, int heal) : Item(coords), heal{heal}, id{1} {
-    sf::Texture texture;
-    texture.loadFromFile("Textures/Items/potion.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 Sword::Sword (std::vector<int> coords, int damage) : Item(coords), damage{damage}, id{2} {
-    //sf::Texture texture;
-    //texture.loadFromFile("Textures/Items/sword.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 Xp_bottle::Xp_bottle (std::vector<int> coords, int xp) : Item(coords), xp{xp}, id{3} {
-    sf::Texture texture;
-    texture.loadFromFile("Textures/Items/xp_bottle.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 Gold::Gold (std::vector<int> coords, int value) : Item(coords), value{value}, id{4} {
-    sf::Texture texture;
-    texture.loadFromFile("Textures/Items/coin.png");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
@@ -38,14 +30,24 @@ Gold::Gold (std::vector<int> coords, int value) : Item(coords), value{value}, id
 //     sprite.setScale(sf::Vector2f(19,19));
 // }
 Armor::Armor (std::vector<int> coords) : Item(coords), id{6} {
-    sf::Texture texture;
-    texture.loadFromFile("Textures/");
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(coords[0]*20, coords[1]*20));
     sprite.setScale(sf::Vector2f(19,19));
 }
 
+void Potion::loadTexture (const std::string& path){
+    texture.loadFromFile(path);
+}
+void Xp_bottle::loadTexture (const std::string& path){
+    texture.loadFromFile(path);
+}
+void Gold::loadTexture (const std::string& path){
+    texture.loadFromFile(path);
+}
 void Sword::loadTexture (const std::string& path){
+    texture.loadFromFile(path);
+}
+void Armor::loadTexture (const std::string& path){
     texture.loadFromFile(path);
 }
 bool Item::add_to_inventory(Hero& hero) {
@@ -92,4 +94,8 @@ void Armor::equip (Hero &hero) {
     hero.armor = this;
 }
 
+sf::Texture Potion::texture;
 sf::Texture Sword::texture;
+sf::Texture Xp_bottle::texture;
+sf::Texture Gold::texture;
+sf::Texture Armor::texture;

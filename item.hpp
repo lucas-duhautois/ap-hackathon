@@ -24,10 +24,12 @@ class Potion : public Item {
     public:
     int heal;
     int id;
+    static sf::Texture texture;
 
     Potion(std::vector<int>, int);
     ~Potion() = default;
     void use(Hero&);
+    static void loadTexture (const std::string& path);
 };
 
 class Sword : public Item {
@@ -46,20 +48,24 @@ class Xp_bottle : public Item {
     public:
     int xp;
     int id;
+    static sf::Texture texture;
 
     Xp_bottle(std::vector<int>, int);
     ~Xp_bottle() = default;
     void use(Hero&);
+    static void loadTexture (const std::string& path);
 };
 
 class Gold : public Item {
     public:
     int value;
     int id;
+    static sf::Texture texture;
 
     Gold(std::vector<int>, int);
     ~Gold() = default;
     void use(Hero&);
+    static void loadTexture (const std::string& path);
 };
 
 // class Bow : public Item {
@@ -75,8 +81,10 @@ class Gold : public Item {
 class Armor : public Item {
     public:
     int id;
+    static sf::Texture texture;
 
     Armor(std::vector<int>);
     ~Armor() = default;
     void equip(Hero&);
+    static void loadTexture (const std::string& path);
 };
