@@ -94,7 +94,3 @@ void Armor::equip (Hero &hero) {
     hero.armor->add_to_inventory(hero);
     hero.armor = this;
 }
-
-int main () {
-    return EXIT_SUCCESS;
-}

@@ -24,5 +24,5 @@ class board{
   int taille_cases;
   std::vector<int> bg;
   int& operator()(const int,const int);
-  board(int, int, int){};
+  board(int, int, int);
 };

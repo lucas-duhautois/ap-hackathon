@@ -17,8 +17,8 @@
 #include <functional>
 #include "rogue.hpp"
 #include "Hero.hpp"
-//#include "item.hpp"
-//#include "dungeon.hpp"
+#include "item.hpp"
+#include "dungeon.hpp"
 
 double randomDouble() {
     static std::random_device rd;  // Génère une graine unique
@@ -45,6 +45,8 @@ void startGame(board &map, sf::Font font)
     window.clear(sf::Color::White);
     
     window.display();
+    std::vector<int> init_pos {10,10};
+    Hero player (init_pos, 100, 100, 10, 1, 0);
     while (window.isOpen())
   {
     sf::Event event;
@@ -55,9 +57,10 @@ void startGame(board &map, sf::Font font)
             exit(1);}
       
     }
-  std::vector<int> init_pos {10,10};
-  Hero player (init_pos, 100, 100, 10, 1, 0);
-  player.print(window);
+    player.print(window);
+    window.clear(sf::Color::White);
+    
+    window.display();
     
     
     
