@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "item.hpp"
 
 
 
@@ -13,16 +14,22 @@ class Hero{
     int strength;
     int gold;
     int xp;
-    int Level;
+    int level;
 
-    std::vector<int> Inventory;
-    std::vector<int> Armor;
+    std::vector<Item*> Inventory;
+    Item* armor;
+    Item* weapon;
 
     std::vector<int> position;
-    sf::Sprite sprite;
+    sf::Sprite hero_sprite;
 
 
     Hero(std::vector<int> position, int hp, int max_hp, int strength, int Level, int xp){}
+
+    void print(sf::RenderWindow& window){}
+    void updt(){}
+    void print_inventory(){}
+
 
     void kill(){}
     void damage(int amount){}
