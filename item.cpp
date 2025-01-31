@@ -44,6 +44,9 @@ void Xp_bottle::loadTexture (const std::string& path){
 void Gold::loadTexture (const std::string& path){
     texture.loadFromFile(path);
 }
+void Sword::loadTexture (const std::string& path){
+    texture.loadFromFile(path);
+}
 void Armor::loadTexture (const std::string& path){
     texture.loadFromFile(path);
 }
