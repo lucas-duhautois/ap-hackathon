@@ -103,6 +103,8 @@ int main()
   Hero::load_hero_texture("Textures/Hero/rogue_hero.png");
   Hero::load_inventory_texture("Textures/Inventory.png");
 
+  Sword::loadTexture("Textures/Items/sword.png");
+
   static sf::Font font;
   font.loadFromFile("gamefont.otf");
 
