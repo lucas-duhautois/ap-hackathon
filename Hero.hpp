@@ -7,6 +7,8 @@
 
 
 
+
+
 class Hero{
     public:
     int hp;
@@ -15,6 +17,9 @@ class Hero{
     int gold;
     int xp;
     int level;
+
+    static sf::Texture hero_texture;
+    static sf::Texture inventory_texture;
 
     std::array<Item*, 15> Inventory;
     Item* armor;
@@ -31,6 +36,8 @@ class Hero{
     void updt();
     void print_inventory(sf::RenderWindow& window);
 
+    static void load_hero_texture(const std::string& path);
+    static void load_inventory_texture(const std::string& path);
 
     void kill();
     void damage(int amount);

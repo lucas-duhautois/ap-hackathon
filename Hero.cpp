@@ -7,11 +7,10 @@
 
 
 
-sf::Texture hero_texture;
-sf::Texture inventory_texture;
-
 
 Hero::Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp): position{position}, hp{hp}, max_hp{max_hp}, strength{strength}, gold{gold}, level{level}, xp{xp}{
+
+
     Inventory = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
     armor = nullptr;
     weapon = nullptr;
@@ -25,6 +24,16 @@ void Hero::print(sf::RenderWindow& window){
 void Hero::updt(){
         hero_sprite.setPosition(20*position[0], 20*position[1]);
     }
+
+void Hero::load_hero_texture(const std::string& path){
+    hero_texture.loadFromFile(path);
+}
+
+void Hero::load_inventory_texture(const std::string& path){
+    inventory_texture.loadFromFile(path);
+}
+
+
 void Hero::print_inventory(sf::RenderWindow& window){
         int x0 = 1200/2 - 125;
         int y0 = 900/2 - 125;
@@ -97,28 +106,29 @@ void Hero::move_up(){
     }
 
 
+sf::Texture Hero::hero_texture;
+sf::Texture Hero::inventory_texture;
 
 
-
-//int main(){
+// int main(){
 //    if (!hero_texture.loadFromFile("Textures/Hero/rogue_hero.png")){
 //        std::cout << "err loading texture" << std::endl;
 //    }
-//    
+   
 //    inventory_texture.loadFromFile("Textures/Inventory.png");
-//
+
 //    Hero hero({20, 20}, 1, 1, 1, 1, 1, 1);
-//
+
 //    sf::RenderWindow window(sf::VideoMode(1200, 900), "Rogue", sf::Style::Close);
 //    while (window.isOpen()) {
-//
+
 //        window.clear(sf::Color::White);
-//
+
 //        hero.print(window);
 //        hero.print_inventory(window);
-//
+
 //        window.display();
-//
+
 //        sf::Event event;
 //        while (window.pollEvent(event)){
 //            if (event.type == sf::Event::Closed) {
@@ -128,7 +138,7 @@ void Hero::move_up(){
 //                if(event.key.code == sf::Keyboard::Escape){
 //                    window.close();
 //                }
-//
+
 //                else if (event.key.code == sf::Keyboard::Right){
 //                    hero.move_right();
 //                }
@@ -146,9 +156,9 @@ void Hero::move_up(){
 //                }
 //            }
 //        }
-//
+
 //        window.display();
 //    }
-//
+
 //    return 0;
-//}
+// }

@@ -41,22 +41,50 @@ board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_
 
 void startGame(board &map, sf::Font font)
 {
+    bool inventory_opened = false;
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
 
     std::vector<int> init_pos {10,10};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
+    Sword test({10, 10}, 4);
+    player.Inventory[7] = test;
     while (window.isOpen())
   {
     sf::Event event;
-    while (window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-            {window.close();
-            exit(1);}
+    while (window.pollEvent(event)){
+           if (event.type == sf::Event::Closed) {
+               window.close();
+               exit(1);
+           }
+           else if (event.type == sf::Event::KeyPressed){
+               if(event.key.code == sf::Keyboard::Escape){
+                   window.close();
+                   exit(1);
+               }
+
+               else if (event.key.code == sf::Keyboard::Right){
+                   player.move_right();
+               }
+               else if (event.key.code == sf::Keyboard::Left){
+                   player.move_left();
+               }
+               else if (event.key.code == sf::Keyboard::Down){
+                   player.move_down();
+               }
+               else if (event.key.code == sf::Keyboard::Up){
+                   player.move_up();
+               }
+               else if (event.key.code == sf::Keyboard::E){
+                 inventory_opened = !inventory_opened;
+              }
+           }
       
     }
     window.clear(sf::Color::White);
     player.print(window);
+    if (inventory_opened){
+      player.print_inventory(window);
+    }
     
     window.display();
     
@@ -70,14 +98,18 @@ void startGame(board &map, sf::Font font)
 
 int main()
 {
+
+  Hero::load_hero_texture("Textures/Hero/rogue_hero.png");
+  Hero::load_inventory_texture("Textures/Inventory.png");
+
   static sf::Font font;
   font.loadFromFile("gamefont.otf");
 
 
 
-  const int nx = 100;
-  const int ny = 50;
-  const int taille = 10;
+  const int nx = 60;
+  const int ny = 45;
+  const int taille = 20;
   board map(nx,ny,taille);
 
   startGame(map, font);
