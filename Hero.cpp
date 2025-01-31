@@ -60,7 +60,9 @@ void Hero::print_inventory(sf::RenderWindow& window){
             }
         }
     }
+
 void Hero::kill(){}
+
 void Hero::damage(int amount){
         hp += amount;
         if (hp >= max_hp){

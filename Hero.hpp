@@ -48,4 +48,8 @@ class Hero{
     void move_right();
     void move_down();
     void move_up();
+    bool can_move_up();
+    bool can_move_down();
+    bool can_move_left();
+    bool can_move_right();
 };

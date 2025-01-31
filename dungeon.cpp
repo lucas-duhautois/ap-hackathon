@@ -2,7 +2,8 @@
 #include "dungeon.hpp"
 
 room::room(int init_Lx ,int init_Ly, std::vector<int>init_p, board &map):Lx{init_Lx},Ly{init_Ly},position{init_p}
-{int x;
+{std::time_t seed;
+ int x;
  int y;
  int n =8;
  for (x = 0; x<Lx; x++)
