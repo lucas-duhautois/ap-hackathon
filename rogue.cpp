@@ -15,32 +15,17 @@
 #include <set>
 #include <random>
 #include <functional>
+#include "rogue.hpp"
 
 
-
-
-
-class board
-{public:
-  int nx;
-  int ny;
-  int taille_cases;
-  std::vector<int> bg;
-
-
-  board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
+ board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
   {
   bg.resize(nx * ny, 0);
-  }
+  };
 
-  int& operator()(const int j,const int i){
-    return bg[nx*i+j];
+  int& board::operator()(const int j,const int i){
+    return bg[nx*i+j];}
 
-}
-
-
-
-};
 
 
 
