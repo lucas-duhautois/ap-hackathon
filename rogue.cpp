@@ -42,7 +42,7 @@ board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_
 void startGame(board &map, sf::Font font)
 {
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
-
+    room Piece(10,10,std::vector<int> {map.nx/2,map.ny/2},map);
     std::vector<int> init_pos {10,10};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
     while (window.isOpen())
