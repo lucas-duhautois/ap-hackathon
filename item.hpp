@@ -15,7 +15,6 @@ class Item {
     Item(std::vector<int>);
     ~Item() = default;
 
-    virtual void use(Hero&) = 0;
     void print(sf::RenderWindow&);
     bool add_to_inventory(Hero&);
     bool remove_from_inventory(Hero&);
