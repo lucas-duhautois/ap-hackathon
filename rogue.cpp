@@ -20,6 +20,13 @@
 //#include "item.hpp"
 //#include "dungeon.hpp"
 
+double randomDouble() {
+    static std::random_device rd;  // Génère une graine unique
+    static std::mt19937 gen(rd()); // Générateur Mersenne Twister
+    static std::uniform_real_distribution<double> dis(0.0, 1.0); // Distribution uniforme
+
+    return dis(gen);
+}
 
 board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_ny},taille_cases{taille_cases}
   {
