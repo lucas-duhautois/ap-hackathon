@@ -16,7 +16,7 @@ class Hero{
     int xp;
     int level;
 
-    std::vector<Item*> Inventory;
+    std::array<Item*, 15> Inventory;
     Item* armor;
     Item* weapon;
 

@@ -17,21 +17,29 @@ class Hero{
     int xp;
     int level;
 
-    std::vector<Item*> Inventory;
+    std::array<Item*, 15> Inventory;
     Item* armor;
     Item* weapon;
 
     std::vector<int> position;
     sf::Sprite hero_sprite;
+    sf::Sprite inventory_sprite;
 
 
     Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp): position{position}, hp{hp}, max_hp{max_hp}, strength{strength}, gold{gold}, level{level}, xp{xp}{
 
-        Inventory = std::vector<Item*>(15);
+        Inventory = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
+        armor = nullptr;
+        weapon = nullptr;
 
         sf::Texture texture;
-        texture.loadFromFile("Textures/rogue_hero.png");
+        texture.loadFromFile("Textures/Hero/rogue_hero.png");
         hero_sprite.setTexture(texture);
+        hero_sprite.setPosition(20*position[0], 20*position[1]);
+
+        sf::Texture inventory_texture;
+        inventory_texture.loadFromFile("Textures/Inventory.png");
+        inventory_sprite.setTexture(inventory_texture);
     }
 
     void print(sf::RenderWindow& window){
@@ -45,9 +53,21 @@ class Hero{
     }
 
     void print_inventory(){
-        int x0 = 0;
-        int y0 = 0;
-        
+        int x0 = 1200 - 125;
+        int y0 = 900 - 125;
+
+        inventory_sprite.setPosition(x0, y0);
+
+        armor->sprite.setPosition(x0 + 54, y0 + 39);
+        armor->sprite.setScale(1.5, 1.5);
+        weapon->sprite.setPosition(x0 + 121, y0 + 39);
+        weapon->sprite.setScale(1.5, 1.5);
+
+        for (int i = 0; i < 15; i++){
+            Inventory[i]->sprite.setPosition(x0 + 25 + 48, y0 + 121);
+            Inventory[i]->sprite.setScale(1.5, 1.5);
+        }
+
     }
 
     void kill(){}
