@@ -22,13 +22,14 @@ class Hero{
 
     std::vector<int> position;
     sf::Sprite hero_sprite;
+    sf::Sprite inventory_sprite;
 
 
-    Hero(std::vector<int> position, int hp, int max_hp, int strength, int Level, int xp);
+    Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp);
 
     void print(sf::RenderWindow& window);
     void updt();
-    void print_inventory();
+    void print_inventory(sf::RenderWindow& window);
 
 
     void kill();
