@@ -32,7 +32,17 @@ class board
   {
   bg.resize(nx * ny, 0);
   }
+
+  int& operator()(const int j,const int i){
+    return bg[nx*i+j];
+
+}
+
+
+
 };
+
+
 
 void startGame(board &map)
 {
