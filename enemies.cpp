@@ -17,9 +17,10 @@ Enemy::Enemy(EnemyType& type, std::vector<int> coord) : type{type}
 {
 
     hp=type.hp;
+    coord = coord;
     sprite = sf::Sprite();
     sprite.setTexture(type.texture);
-    sprite.setPosition(coord[0], coord[1]);
+    sprite.setPosition(20*coord[0], 20*coord[1]);
 
 }
 
@@ -93,3 +94,5 @@ void Enemy::print(sf::RenderWindow& fen){
     fen.draw(sprite);
 }
 
+
+std::map<int, EnemyType*> EnemyType::dicoEnemies;
