@@ -2,7 +2,7 @@
 #include "Hero.hpp"
 #include "rogue.hpp"
 
-EnemyType::EnemyType(int id, std::string nom, const std::string& texturePath, int hp, int damage, float hit_rate) : id{id}, nom{nom}, hp{hp}, damage{damage}, hit_rate{hit_rate} {
+EnemyType::EnemyType(int id, std::string nom, const std::string& texturePath, int hp, int damage) : id{id}, nom{nom}, hp{hp}, damage{damage} {
         if (!texture.loadFromFile(texturePath)) {
             std::cerr << "Erreur de chargement : " << texturePath << std::endl;
         }
@@ -17,9 +17,9 @@ Enemy::Enemy(EnemyType& type, std::vector<int> coord) : type{type}
 {
 
     hp=type.hp;
-    sprite = new sf::Sprite;
-    sprite->setTexture(type.texture);
-    sprite->setPosition(coord[0], coord[1]);
+    sprite = sf::Sprite();
+    sprite.setTexture(type.texture);
+    sprite.setPosition(coord[0], coord[1]);
 
 }
 
@@ -90,6 +90,6 @@ void Enemy::combat(Hero& hero, sf::RenderWindow& window){
 
 
 void Enemy::print(sf::RenderWindow& fen){
-    fen.draw(*sprite);
+    fen.draw(sprite);
 }
 

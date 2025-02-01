@@ -19,6 +19,7 @@
 #include "Hero.hpp"
 #include "item.hpp"
 #include "dungeon.hpp"
+#include "enemies.hpp"
 
 double randomDouble() {
     static std::random_device rd;  // Génère une graine unique
@@ -34,6 +35,11 @@ board::board(int init_nx, int init_ny, int taille_cases) : nx{init_nx}, ny{init_
 
 int& board::operator()(const int j, const int i) {
     return bg[nx * i + j];
+}
+
+
+int& board::operator()(std::vector<int> pos) {
+    return bg[nx *pos[1]  + pos[0]];
 }
 
 void board::draw(sf::RenderWindow& window) {
@@ -140,6 +146,8 @@ int main() {
     Sword::loadTexture("Textures/Items/sword.png");
     Xp_bottle::loadTexture("Textures/Items/xp_bottle.png");
     Gold::loadTexture("Textures/Items/gold.png");
+    EnemyType gobelin(201, "gobelin", "Textures/enemies/gobelin.png", 10, 4);
+    EnemyType gobelin(211, "slime", "Textures/enemies/slime.png", 15, 2);
     // Armor::loadTexture("Textures/Items/armor.png");
 
     static sf::Font font;

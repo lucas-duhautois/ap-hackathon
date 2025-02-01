@@ -31,7 +31,7 @@ class EnemyType{
     int damage;
     float hit_rate;
     
-    EnemyType(int id, std::string nom, const std::string& texturePath, int hp, int damage, float hit_rate);
+    EnemyType(int id, std::string nom, const std::string& texturePath, int hp, int damage);
 
 
     
@@ -42,7 +42,7 @@ class Enemy{
 
     EnemyType type;
     int hp;
-    sf::Sprite* sprite;
+    sf::Sprite sprite;
 
     Enemy(EnemyType& type, std::vector<int> coord);
 

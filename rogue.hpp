@@ -26,6 +26,7 @@ class board{
   int taille_cases;
   std::vector<int> bg;
   int& operator()(const int,const int);
+  int& operator()(std::vector<int>);
   board(int, int, int);
   void draw(sf::RenderWindow&);
 };
