@@ -5,7 +5,9 @@
 #include <SFML/Graphics.hpp>
 #include "item.hpp"
 
-
+class board{
+    int& operator()(const int j, const int i);
+};
 
 
 
@@ -33,7 +35,7 @@ class Hero{
     Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp);
 
     void print(sf::RenderWindow& window);
-    void updt();
+    void updt(int origin, board& map);
     void print_inventory(sf::RenderWindow& window);
 
     static void load_hero_texture(const std::string& path);

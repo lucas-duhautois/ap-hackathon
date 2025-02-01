@@ -21,8 +21,10 @@ Hero::Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold
 void Hero::print(sf::RenderWindow& window){
         window.draw(hero_sprite);
     }
-void Hero::updt(){
-        hero_sprite.setPosition(20*position[0], 20*position[1]);
+void Hero::updt(int origin, board& map){
+    int arrival_id = map (position[0], position[1]);
+    
+    hero_sprite.setPosition(20*position[0], 20*position[1]);
     }
 
 void Hero::load_hero_texture(const std::string& path){
@@ -95,19 +97,19 @@ void Hero::gain_gold(int amount){
     }
 void Hero::move_left(){
         position[0]--;
-        this->updt();
+        this->updt(-1);
     }
 void Hero::move_right(){
         position[0]++;
-        this->updt();
+        this->updt(1);
     }
 void Hero::move_down(){
         position[1]++;
-        this->updt();
+        this->updt(2);
     }
 void Hero::move_up(){
         position[1]--;
-        this->updt();
+        this->updt(-2);
     }
 
 
