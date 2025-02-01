@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "item.hpp"
 #include "Hero.hpp"
+#include "rogue.hpp"
 
 
 
@@ -22,8 +23,8 @@ void Hero::print(sf::RenderWindow& window){
         window.draw(hero_sprite);
     }
 void Hero::updt(int origin, board& map){
-    int arrival_id = map (position[0], position[1]);
-    
+    int arrival_id = map (position);
+
     hero_sprite.setPosition(20*position[0], 20*position[1]);
     }
 

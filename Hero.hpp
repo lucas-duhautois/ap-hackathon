@@ -5,9 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "item.hpp"
 
-class board{
-    int& operator()(const int j, const int i);
-};
+class board;
 
 
 
