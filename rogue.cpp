@@ -109,16 +109,16 @@ void startGame(board &map, sf::Font font) {
                     window.close();
                     exit(1);
                 } else if (event.key.code == sf::Keyboard::Right && map(player.position[0] + 1, player.position[1]) != 0 && cooldown_right.count() > 100) {
-                    player.move_right();
+                    player.move_right(map);
                     start_right = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::Left && map(player.position[0] - 1, player.position[1]) != 0 && cooldown_left.count() > 100) {
-                    player.move_left();
+                    player.move_left(map);
                     start_left = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::Down && map(player.position[0], player.position[1] + 1) != 0 && cooldown_down.count() > 100) {
-                    player.move_down();
+                    player.move_down(map);
                     start_down = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::Up && map(player.position[0], player.position[1] - 1) != 0 && cooldown_up.count() > 100) {
-                    player.move_up();
+                    player.move_up(map);
                     start_up = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::E) {
                     inventory_opened = !inventory_opened;

@@ -24,7 +24,13 @@ void Hero::print(sf::RenderWindow& window){
     }
 void Hero::updt(int origin, board& map){
     int arrival_id = map (position);
+    if (arrival_id / 100 == 1){
+        map.dico_Item[position]->add_to_inventory(*this);
+    }
+    else if (arrival_id / 100 == 2){
+        
 
+    }
     hero_sprite.setPosition(20*position[0], 20*position[1]);
     }
 
@@ -96,21 +102,21 @@ void Hero::gain_strength(int amount){
 void Hero::gain_gold(int amount){
         gold += amount;
     }
-void Hero::move_left(){
+void Hero::move_left(board& map){
         position[0]--;
-        this->updt(-1);
+        this->updt(-1, map);
     }
-void Hero::move_right(){
+void Hero::move_right(board& map){
         position[0]++;
-        this->updt(1);
+        this->updt(1, map);
     }
-void Hero::move_down(){
+void Hero::move_down(board& map){
         position[1]++;
-        this->updt(2);
+        this->updt(2, map);
     }
-void Hero::move_up(){
+void Hero::move_up(board& map){
         position[1]--;
-        this->updt(-2);
+        this->updt(-2, map);
     }
 
 
