@@ -74,13 +74,11 @@ void startGame(board &map, sf::Font font) {
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
     std::time_t seed;
     srand(seed);
-    room Piece(7,7,std::vector<int> {rand()%(map.nx-20),rand()%(map.ny-20)},map);
+
+    std::vector<int> init_room {rand()%(map.nx-20),rand()%(map.ny-20)};
+    room Piece(7, 7, init_room, map);
     
-    std::vector<int> init_pos(2);
-    do {
-        init_pos[0] = static_cast<int>(1+ randomDouble()*(map.nx -2));
-        init_pos[1] = static_cast<int>(1+ randomDouble()*(map.ny-2));
-    } while (map(init_pos[0],init_pos[1]) != 1);
+    std::vector<int> init_pos {init_room[0] + 3, init_room[1] + 3};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
 
     Sword test({10, 10}, 4);
