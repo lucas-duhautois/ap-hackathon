@@ -18,6 +18,8 @@
 #include <functional>
 
 double randomDouble();
+class Item;
+class Enemy;
 
 class board{
   public:
