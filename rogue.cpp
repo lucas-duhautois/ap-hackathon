@@ -72,9 +72,10 @@ void startGame(board &map, sf::Font font) {
     auto start_right = std::chrono::high_resolution_clock::now();
     bool inventory_opened = false;
     static sf::RenderWindow window(sf::VideoMode(map.nx * map.taille_cases, map.ny * map.taille_cases), "rogue");
-    room Piece(10,10,std::vector<int> {map.nx/2,0},map);
-    tile sol(std::vector<int> {map.nx/2,10},map,1);
-    tile sol2(std::vector<int> {map.nx/2-1,6},map,2);
+    std::time_t seed;
+    srand(seed);
+    room Piece(7,7,std::vector<int> {rand()%(map.nx-20),rand()%(map.ny-20)},map);
+    
     std::vector<int> init_pos{map.nx / 2 - 1, map.ny / 2 - 1};
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
 
