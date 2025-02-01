@@ -3,6 +3,7 @@
 
 room::room(int init_Lx ,int init_Ly, std::vector<int>init_p, board &map):Lx{init_Lx},Ly{init_Ly},position{init_p}
 {std::time_t seed;
+srand(seed);
  int x;
  int y;
  int n =8;
