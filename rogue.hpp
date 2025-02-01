@@ -25,6 +25,9 @@ class board{
   int ny;
   int taille_cases;
   std::vector<int> bg;
+  std::map<std::vector<int>, Item*> dico_Item;
+  std::map<std::vector<int>, Enemy*> dico_Enemy;
+
   int& operator()(const int,const int);
   int& operator()(std::vector<int>);
   board(int, int, int);

@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "item.hpp"
 
-
+class board;
 
 
 
@@ -33,7 +33,7 @@ class Hero{
     Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold, int level, int xp);
 
     void print(sf::RenderWindow& window);
-    void updt();
+    void updt(int origin, board& map);
     void print_inventory(sf::RenderWindow& window);
 
     static void load_hero_texture(const std::string& path);
@@ -44,12 +44,8 @@ class Hero{
     void gain_xp(int amount);
     void gain_strength(int amount);
     void gain_gold(int amount);
-    void move_left();
-    void move_right();
-    void move_down();
-    void move_up();
-    bool can_move_up();
-    bool can_move_down();
-    bool can_move_left();
-    bool can_move_right();
+    void move_left(board& map);
+    void move_right(board& map);
+    void move_down(board& map);
+    void move_up(board& map);
 };
