@@ -92,6 +92,9 @@ void startGame(board &map, sf::Font font) {
     window.display();
     test.equip(player);
 
+
+    Enemy gob1(*EnemyType::dicoEnemies[201], std::vector<int> {init_pos[0]-2, init_pos[1]-2});
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -130,6 +133,7 @@ void startGame(board &map, sf::Font font) {
 
         map.draw(window);
         player.print(window);
+        gob1.print(window);
         if (inventory_opened) {
             player.print_inventory(window);
         }
@@ -147,7 +151,7 @@ int main() {
     Xp_bottle::loadTexture("Textures/Items/xp_bottle.png");
     Gold::loadTexture("Textures/Items/gold.png");
     EnemyType gobelin(201, "gobelin", "Textures/enemies/gobelin.png", 10, 4);
-    EnemyType gobelin(211, "slime", "Textures/enemies/slime.png", 15, 2);
+    EnemyType slime(211, "slime", "Textures/enemies/slime.png", 15, 2);
     // Armor::loadTexture("Textures/Items/armor.png");
 
     static sf::Font font;
