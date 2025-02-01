@@ -76,7 +76,11 @@ void startGame(board &map, sf::Font font) {
     srand(seed);
     room Piece(7,7,std::vector<int> {rand()%(map.nx-20),rand()%(map.ny-20)},map);
     
-    std::vector<int> init_pos{map.nx / 2 - 1, map.ny / 2 - 1};
+    std::vector<int> init_pos(2);
+    do {
+        init_pos[0] = static_cast<int>(1+ randomDouble()*(map.nx -2));
+        init_pos[1] = static_cast<int>(1+ randomDouble()*(map.ny-2));
+    } while (map(init_pos[0],init_pos[1]) != 1);
     Hero player(init_pos, 20, 20, 5, 10, 1, 0);
 
     Sword test({10, 10}, 4);
