@@ -22,14 +22,19 @@ Hero::Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold
 void Hero::print(sf::RenderWindow& window){
         window.draw(hero_sprite);
     }
-void Hero::updt(int origin, board& map){
+bool Hero::updt(int origin, board& map){
     int arrival_id = map (position);
     if (arrival_id / 100 == 1){
         map.dico_Item[position]->add_to_inventory(*this);
     }
     else if (arrival_id / 100 == 2){
-        
-
+        if (origin < 2){
+            position[0] += origin;
+            }
+        else{
+            position[1] += origin - 3;
+            }
+        return true;
     }
     hero_sprite.setPosition(20*position[0], 20*position[1]);
     }
@@ -112,11 +117,11 @@ void Hero::move_right(board& map){
     }
 void Hero::move_down(board& map){
         position[1]++;
-        this->updt(2, map);
+        this->updt(4, map);
     }
 void Hero::move_up(board& map){
         position[1]--;
-        this->updt(-2, map);
+        this->updt(2, map);
     }
 
 
