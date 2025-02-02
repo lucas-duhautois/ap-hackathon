@@ -37,6 +37,7 @@ bool Hero::updt(int origin, board& map){
         return true;
     }
     hero_sprite.setPosition(20*position[0], 20*position[1]);
+    return false;
     }
 
 void Hero::load_hero_texture(const std::string& path){
