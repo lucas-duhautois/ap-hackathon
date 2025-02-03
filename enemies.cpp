@@ -1,6 +1,7 @@
-#include "enemies.hpp"
+#include "item.hpp"
 #include "Hero.hpp"
 #include "rogue.hpp"
+#include "enemies.hpp"
 
 EnemyType::EnemyType(int id, std::string nom, const std::string& texturePath, int hp, int damage) : id{id}, nom{nom}, hp{hp}, damage{damage} {
         if (!texture.loadFromFile(texturePath)) {
@@ -13,11 +14,10 @@ EnemyType::EnemyType(int id, std::string nom, const std::string& texturePath, in
 
 
 
-Enemy::Enemy(EnemyType& type, std::vector<int> coord) : type{type}
+Enemy::Enemy(EnemyType& type, std::vector<int> coord) : type{type}, coord{coord}
 {
 
     hp=type.hp;
-    coord = coord;
     sprite = sf::Sprite();
     sprite.setTexture(type.texture);
     sprite.setPosition(20*coord[0], 20*coord[1]);
@@ -27,7 +27,7 @@ Enemy::Enemy(EnemyType& type, std::vector<int> coord) : type{type}
 void Enemy::combat(Hero& hero, sf::RenderWindow& window){
         double succes;
         int degats;
-        window.clear(sf::Color::Black);
+        //window.clear(sf::Color::Black);
         sf::Text texte;
         texte.setCharacterSize(10); 
         texte.setFillColor(sf::Color::White); 
@@ -35,8 +35,7 @@ void Enemy::combat(Hero& hero, sf::RenderWindow& window){
         texte.setString("un très très méchant " + type.nom + " vous attaque !");
         window.draw(texte);
         window.display();
-        while (hp > 0 || hero.hp > 0){
-            
+        while (hp > 0 || hero.hp > 0){ 
             
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
                 window.clear(sf::Color::Black);

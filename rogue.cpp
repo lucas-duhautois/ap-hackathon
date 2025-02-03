@@ -95,7 +95,12 @@ void startGame(board &map, sf::Font font) {
 
     Enemy gob1(*EnemyType::dicoEnemies[201], std::vector<int> {init_pos[0]-2, init_pos[1]-2});
 
+    map.dico_Enemy[gob1.coord] = &gob1;
+
+    map(gob1.coord) = 201;
+
     while (window.isOpen()) {
+
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -112,16 +117,16 @@ void startGame(board &map, sf::Font font) {
                     window.close();
                     exit(1);
                 } else if (event.key.code == sf::Keyboard::Right && map(player.position[0] + 1, player.position[1]) != 0 && cooldown_right.count() > 100) {
-                    player.move_right(map);
+                    player.move_right(map, window);
                     start_right = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::Left && map(player.position[0] - 1, player.position[1]) != 0 && cooldown_left.count() > 100) {
-                    player.move_left(map);
+                    player.move_left(map, window);
                     start_left = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::Down && map(player.position[0], player.position[1] + 1) != 0 && cooldown_down.count() > 100) {
-                    player.move_down(map);
+                    player.move_down(map, window);
                     start_down = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::Up && map(player.position[0], player.position[1] - 1) != 0 && cooldown_up.count() > 100) {
-                    player.move_up(map);
+                    player.move_up(map, window);
                     start_up = std::chrono::high_resolution_clock::now();
                 } else if (event.key.code == sf::Keyboard::E) {
                     inventory_opened = !inventory_opened;

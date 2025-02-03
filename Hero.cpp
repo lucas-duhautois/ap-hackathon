@@ -1,9 +1,11 @@
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+
 #include "item.hpp"
 #include "Hero.hpp"
 #include "rogue.hpp"
+#include "enemies.hpp"
 
 
 
@@ -22,22 +24,25 @@ Hero::Hero(std::vector<int> position, int hp, int max_hp, int strength, int gold
 void Hero::print(sf::RenderWindow& window){
         window.draw(hero_sprite);
     }
-bool Hero::updt(int origin, board& map){
+void Hero::updt(int origin, board& map, sf::RenderWindow& window){
     int arrival_id = map (position);
+
+    std::cout << arrival_id << std::endl;
+
     if (arrival_id / 100 == 1){
         map.dico_Item[position]->add_to_inventory(*this);
     }
     else if (arrival_id / 100 == 2){
+        auto enemy_position = position;
         if (origin < 2){
             position[0] += origin;
-            }
+        }
         else{
             position[1] += origin - 3;
-            }
-        return true;
+        }
+        map.dico_Enemy[enemy_position]->combat(*this, window);
     }
     hero_sprite.setPosition(20*position[0], 20*position[1]);
-    return false;
     }
 
 void Hero::load_hero_texture(const std::string& path){
@@ -76,16 +81,12 @@ void Hero::print_inventory(sf::RenderWindow& window){
         }
     }
 
-void Hero::kill(){}
+
 
 void Hero::damage(int amount){
         hp += amount;
         if (hp >= max_hp){
             hp = max_hp;
-        }
-
-        if (hp <= 0){
-            this->kill();
         }
     }
 void Hero::gain_xp(int amount){
@@ -108,21 +109,21 @@ void Hero::gain_strength(int amount){
 void Hero::gain_gold(int amount){
         gold += amount;
     }
-void Hero::move_left(board& map){
+void Hero::move_left(board& map, sf::RenderWindow& window){
         position[0]--;
-        this->updt(-1, map);
+        this->updt(-1, map, window);
     }
-void Hero::move_right(board& map){
+void Hero::move_right(board& map, sf::RenderWindow& window){
         position[0]++;
-        this->updt(1, map);
+        this->updt(1, map, window);
     }
-void Hero::move_down(board& map){
+void Hero::move_down(board& map, sf::RenderWindow& window){
         position[1]++;
-        this->updt(4, map);
+        this->updt(4, map, window);
     }
-void Hero::move_up(board& map){
+void Hero::move_up(board& map, sf::RenderWindow& window){
         position[1]--;
-        this->updt(2, map);
+        this->updt(2, map, window);
     }
 
 

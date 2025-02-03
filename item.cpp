@@ -1,5 +1,7 @@
 #include "item.hpp"
 #include "Hero.hpp"
+#include "rogue.hpp"
+#include "enemies.hpp"
 
 Item::Item (std::vector<int> coords) : coords{coords} {}
 Potion::Potion (std::vector<int> coords, int heal) : Item(coords), heal{heal}, id{1} {
